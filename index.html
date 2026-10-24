@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alim | Yazılımcı Portföyü</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080808;
+      --panel: #111111;
+      --red: #ff0000;
+      --dark-red: #bc0202;
+      --accent: #830000;
+      --gray: #b9b9b9;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; }
+
+    .navbar {
+      background: rgba(8,8,8,.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #ffffff15;
+      padding: 16px 0;
+    }
+
+    .navbar-brand {
+      color: white;
+      font: 900 24px 'Orbitron', sans-serif;
+    }
+
+    .navbar-brand span,
+    .section-title span { color: var(--red); }
+
+    .nav-link {
+      color: #ddd !important;
+      font-size: 13px;
+      margin-left: 14px;
+      transition: .3s;
+    }
+
+    .nav-link:hover { color: var(--red) !important; }
+    .navbar-toggler { border-color: #555; }
+    .navbar-toggler-icon { filter: invert(1); }
+
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 70px;
+      background:
+        radial-gradient(ellipse at 80% 45%, #bc020222, transparent 45%),
+        linear-gradient(120deg, #080808 55%, #160505);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .15;
+      pointer-events: none;
+      background-image:
+        linear-gradient(#ff000018 1px, transparent 1px),
+        linear-gradient(90deg, #ff000018 1px, transparent 1px);
+      background-size: 45px 45px;
+    }
+
+    .hero-label, .section-tag {
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font: 900 clamp(42px, 7vw, 80px)/1.15 'Orbitron', sans-serif;
+      margin: 22px 0;
+    }
+
+    .hero-title span {
+      color: var(--red);
+      text-shadow: 0 0 30px #ff000044;
+    }
+
+    .hero-text, .section-description {
+      color: var(--gray);
+      max-width: 560px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .btn-red, .btn-outline-red {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 5px;
+      font-size: 13px;
+      transition: .3s;
+    }
+
+    .btn-red {
+      background: var(--red);
+      border: 1px solid var(--red);
+      color: white;
+    }
+
+    .btn-red:hover {
+      background: var(--dark-red);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px #ff000033;
+    }
+
+    .btn-outline-red {
+      color: white;
+      border: 1px solid #555;
+    }
+
+    .btn-outline-red:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      max-width: 490px;
+      margin: auto;
+    }
+
+    .hero-image-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 50%;
+      background: #ff000022;
+      filter: blur(65px);
+    }
+
+    .hero-image {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 30px #ff000022);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .image-fallback {
+      display: none;
+      min-height: 300px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--dark-red);
+      border-radius: 15px;
+      background: #111;
+      font: 35px 'Orbitron', sans-serif;
+    }
+
+    .image-caption {
+      text-align: center;
+      color: #888;
+      font-size: 11px;
+      margin-top: 15px;
+      letter-spacing: 2px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    section:not(#home) {
+      padding: 95px 0;
+      scroll-margin-top: 75px;
+    }
+
+    #about, #projects { background: #0d0d0d; }
+
+    .section-title {
+      font: 800 clamp(27px, 4vw, 42px)/1.3 'Orbitron', sans-serif;
+      margin: 12px 0 18px;
+    }
+
+    .about-card, .skill-box, .project-card {
+      background: linear-gradient(145deg, #171717, #0d0d0d);
+      border: 1px solid #ffffff12;
+      border-radius: 10px;
+      padding: 27px;
+      height: 100%;
+      transition: .3s;
+    }
+
+    .about-card:hover, .skill-box:hover, .project-card:hover {
+      border-color: #ff000077;
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      color: var(--red);
+      font-size: 27px;
+      margin-bottom: 15px;
+    }
+
+    .about-card h3, .skill-box h3, .project-card h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .about-card p, .project-card p {
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .info-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #ffffff12;
+      font-size: 12px;
+    }
+
+    .info-line span:first-child { color: #888; }
+    .info-line span:last-child { text-align: right; }
+
+    .skill-item { margin: 18px 0; }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .skill-label span:last-child { color: var(--red); }
+
+    .progress {
+      height: 5px;
+      background: #292929;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--accent), var(--red));
+    }
+
+    .learning-note {
+      margin-top: 25px;
+      padding: 15px;
+      border-left: 3px solid var(--red);
+      background: #ff00000b;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .project-number {
+      color: var(--red);
+      font: 12px 'Orbitron', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .project-card h3 { margin-top: 22px; }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .project-tags span {
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 6px 9px;
+      font-size: 10px;
+      color: #ccc;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--red);
+      font-size: 12px;
+    }
+
+    .contact-panel {
+      background: linear-gradient(135deg, #180606, #111);
+      border: 1px solid #ff000033;
+      border-radius: 14px;
+      padding: clamp(25px, 5vw, 55px);
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: white;
+      background: #ffffff08;
+      border: 1px solid #ffffff12;
+      padding: 16px;
+      border-radius: 7px;
+      margin-top: 12px;
+      transition: .3s;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-link:hover {
+      border-color: var(--red);
+      color: white;
+      transform: translateX(3px);
+    }
+
+    .contact-link .card-icon { margin: 0; flex-shrink: 0; }
+
+    .contact-link strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .contact-link small {
+      display: block;
+      color: #999;
+      margin-top: 3px;
+      font-size: 11px;
+    }
+
+    footer {
+      padding: 25px 0;
+      background: #050505;
+      border-top: 1px solid #ffffff12;
+      color: #777;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    footer span { color: var(--red); }
+
+    .back-top {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 1000;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 6px;
+      color: white;
+      background: var(--red);
+      display: none;
+      cursor: pointer;
+    }
+
+    .back-top.show { display: block; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 767px) {
+      #home { text-align: center; }
+      .hero-text { margin: auto; }
+      .hero-image-wrap { margin-top: 35px; }
+      section:not(#home) { padding: 70px 0; }
+      .nav-link { margin: 4px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home">ALIM<span>.</span></a>
+
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+      aria-controls="navbarMenu" aria-expanded="false"
+      aria-label="Menüyü aç veya kapat">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Ana Sayfa</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">Hakkımda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Becerilerim</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projelerim</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Sosyal Medya</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="home">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 reveal">
+        <div class="hero-label">Merhaba, dünyaya kod yazıyorum</div>
+
+        <h1 class="hero-title">
+          Ben Alim.<br>
+          <span id="typing">Yazılımcıyım.</span>
+        </h1>
+
+        <p class="hero-text">
+          13 yaşındayım. Yazılım dersleri alıyor, yeni teknolojiler
+          öğreniyor ve kendi projelerimi geliştirmeye çalışıyorum.
+          Henüz yolun başındayım ve her gün ilerlemeyi hedefliyorum.
+        </p>
+
+        <div class="d-flex gap-3 flex-wrap mt-4 justify-content-center justify-content-lg-start">
+          <a href="#projects" class="btn-red">Projelerimi Gör ↗</a>
+          <a href="#about" class="btn-outline-red">Beni Tanı</a>
+        </div>
+
+        <div class="d-flex gap-4 mt-5 justify-content-center justify-content-lg-start flex-wrap">
+          <div><div class="fw-bold fs-4">13</div><div class="text-secondary small">Yaş</div></div>
+          <div><div class="fw-bold fs-4">∞</div><div class="text-secondary small">Öğrenilecek şey</div></div>
+          <div><div class="fw-bold fs-4">01</div><div class="text-secondary small">Hedef: Gelişmek</div></div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 reveal">
+        <div class="hero-image-wrap">
+          <img
+            src="44766e57-3e2d-4dfc-91ca-dafb5e0fcac2.jpg"
+            alt="Anime ve futbol temalı tasarım"
+            class="hero-image"
+            onerror="this.style.display='none'; document.getElementById('imageFallback').style.display='flex';">
+
+          <div id="imageFallback" class="image-fallback">
+            ALIM<span style="color:#ff0000">.</span>
+          </div>
+
+          <div class="image-caption">ANİME × FUTBOL × YAZILIM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5 reveal">
+        <div class="section-tag">01 / Hakkımda</div>
+        <h2 class="section-title">Kod yazmayı <span>öğreniyorum.</span></h2>
+        <p class="section-description">
+          Yazılım benim için yeni şeyler üretmenin bir yolu.
+          Dersler alıyor, öğrendiklerimi uyguluyor ve kendi fikirlerimi
+          projelere dönüştürmeye çalışıyorum.
+        </p>
+      </div>
+
+      <div class="col-lg-7 reveal">
+        <div class="about-card">
+          <div class="card-icon">✦</div>
+          <h3>Benim hakkımda</h3>
+          <p>
+            Meraklı, öğrenmeyi seven ve teknolojiyle ilgilenen biriyim.
+            Henüz her şeyi bilmiyorum ama kendimi geliştirmek için
+            çalışıyorum. Bu site, öğrenme yolculuğumu ve projelerimi
+            paylaşmak için hazırladığım kişisel portföyüm.
+          </p>
+
+          <div class="mt-4">
+            <div class="info-line"><span>İsim</span><span>Alim</span></div>
+            <div class="info-line"><span>Yaş</span><span>13</span></div>
+            <div class="info-line"><span>Alan</span><span>Yazılım</span></div>
+            <div class="info-line"><span>Durum</span><span>Öğreniyorum</span></div>
+            <div class="info-line"><span>İlgi alanları</span><span>Anime, futbol, teknoloji</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="reveal mb-5">
+      <div class="section-tag">02 / Becerilerim</div>
+      <h2 class="section-title">Geliştirdiğim <span>beceriler.</span></h2>
+      <p class="section-description">
+        Yazılım öğrenme sürecindeyim. Bu göstergeler örnektir;
+        seviyene göre değiştirebilirsin.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-box">
+          <h3>⌘ Web Geliştirme</h3>
+          <div class="skill-item">
+            <div class="skill-label"><span>HTML</span><span>Öğreniyorum</span></div>
+            <div class="progress"><div class="progress-bar" style="width:45%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>CSS</span><span>Öğreniyorum</span></div>
+            <div class="progress"><div class="progress-bar" style="width:35%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>JavaScript</span><span>Başlangıç</span></div>
+            <div class="progress"><div class="progress-bar" style="width:20%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-box">
+          <h3>⚙ Araçlar</h3>
+          <div class="skill-item">
+            <div class="skill-label"><span>Bootstrap</span><span>Öğreniyorum</span></div>
+            <div class="progress"><div class="progress-bar" style="width:30%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>VS Code</span><span>Kullanıyorum</span></div>
+            <div class="progress"><div class="progress-bar" style="width:40%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Problem çözme</span><span>Gelişiyor</span></div>
+            <div class="progress"><div class="progress-bar" style="width:35%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-box">
+          <h3>🚀 Hedeflerim</h3>
+          <p class="section-description">
+            Daha iyi web siteleri tasarlamak, JavaScript öğrenmek ve
+            kendi oyunlarımı geliştirmek istiyorum.
+          </p>
+          <div class="project-tags">
+            <span>Web Tasarım</span>
+            <span>Oyun Geliştirme</span>
+            <span>JavaScript</span>
+            <span>Yeni Fikirler</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="learning-note reveal">
+      Beceri çubukları örnektir; kendi seviyene göre güncelleyebilirsin.
+    </p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="reveal mb-5">
+      <div class="section-tag">03 / Projelerim</div>
+      <h2 class="section-title">Fikirlerimden <span>projelerime.</span></h2>
+      <p class="section-description">
+        Geliştirdiğin projeleri burada tanıtabilir ve bağlantılarını ekleyebilirsin.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <div class="project-number">PROJECT_001</div>
+          <h3>Kişisel Portföy</h3>
+          <p>Kendimi, becerilerimi ve sosyal medya hesaplarımı tanıttığım kişisel web sitem.</p>
+          <div class="project-tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JS</span></div>
+          <a href="#home" class="project-link">Bu siteyi incele ↗</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <div class="project-number">PROJECT_002</div>
+          <h3>Oyun Projem</h3>
+          <p>Geliştirdiğin oyun fikrini, özelliklerini ve nasıl oynandığını burada anlat.</p>
+          <div class="project-tags"><span>JavaScript</span><span>Oyun</span></div>
+          <a href="#contact" class="project-link">Sosyal medyama ulaş ↗</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <div class="project-number">PROJECT_003</div>
+          <h3>Yeni Fikirler</h3>
+          <p>Öğrendiğin teknolojilerle yaptığın deneyleri ve gelecekteki projelerini paylaş.</p>
+          <div class="project-tags"><span>Teknoloji</span><span>Öğrenme</span></div>
+          <a href="#contact" class="project-link">Beni takip et ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sosyal medya: Instagram + YouTube + GitHub -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-panel reveal">
+      <div class="row align-items-center g-4">
+
+        <div class="col-lg-6">
+          <div class="section-tag">04 / SOSYAL MEDYA</div>
+          <h2 class="section-title">Beni <span>takip et!</span></h2>
+          <p class="section-description">
+            Yazılım, anime, futbol ve diğer içeriklerim için
+            sosyal medya hesaplarıma göz at!
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+
+          <a class="contact-link"
+             href="https://www.instagram.com/monkey_d._luffy_fan65/"
+             target="_blank" rel="noopener noreferrer">
+            <span class="card-icon">◎</span>
+            <span>
+              <strong>Instagram</strong>
+              <small>@monkey_d._luffy_fan65</small>
+            </span>
+            <span class="ms-auto">↗</span>
+          </a>
+
+          <a class="contact-link"
+             href="https://www.youtube.com/@Gojo_sensei1903"
+             target="_blank" rel="noopener noreferrer">
+            <span class="card-icon">▶</span>
+            <span>
+              <strong>YouTube</strong>
+              <small>@Gojo_sensei1903</small>
+            </span>
+            <span class="ms-auto">↗</span>
+          </a>
+
+          <a class="contact-link"
+             href="https://github.com/"
+             target="_blank" rel="noopener noreferrer">
+            <span class="card-icon">⌘</span>
+            <span>
+              <strong>GitHub</strong>
+              <small>Kodlarım ve projelerim</small>
+            </span>
+            <span class="ms-auto">↗</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p class="mb-2">© <span id="year"></span> ALIM. Tüm hakları saklıdır.</p>
+    <p class="mb-0">Tutkuyla tasarlandı <span>♥</span>, sabırla kodlandı.</p>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Sayfanın başına dön">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Başlıktaki yazı animasyonu
+  const typingElement = document.getElementById("typing");
+  const words = ["Yazılımcıyım.", "Öğreniyorum.", "Projeler üretiyorum."];
+  let wordIndex = 0;
+  let charIndex = words[0].length;
+  let deleting = false;
+
+  function typeEffect() {
+    const word = words[wordIndex];
+    charIndex += deleting ? -1 : 1;
+    typingElement.textContent = word.substring(0, charIndex);
+
+    let delay = deleting ? 45 : 90;
+
+    if (!deleting && charIndex === word.length) {
+      deleting = true;
+      delay = 1400;
+    } else if (deleting && charIndex === 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delay = 350;
+    }
+
+    setTimeout(typeEffect, delay);
+  }
+
+  setTimeout(typeEffect, 1800);
+
+  // Bölüm giriş animasyonları
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach((element) => {
+    observer.observe(element);
+  });
+
+  // Yukarı çık butonu
+  const backTop = document.getElementById("backTop");
+
+  window.addEventListener("scroll", () => {
+    backTop.classList.toggle("show", window.scrollY > 400);
+  });
+
+  backTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Mobil menüyü bağlantıya tıklanınca kapat
+  document.querySelectorAll("#navbarMenu .nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      const menu = document.getElementById("navbarMenu");
+      if (menu.classList.contains("show")) {
+        bootstrap.Collapse.getOrCreateInstance(menu).hide();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
